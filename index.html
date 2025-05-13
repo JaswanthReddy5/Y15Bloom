@@ -39,13 +39,14 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            padding: 0 10px;
         }
 
         .birthday-card {
             position: relative;
             background: rgba(0, 0, 0, 0.6);
             backdrop-filter: blur(10px);
-            padding: 2.5rem;
+            padding: 2rem;
             border-radius: 20px;
             text-align: center;
             box-shadow: 0 0 40px rgba(255, 105, 180, 0.4);
@@ -66,7 +67,7 @@
             z-index: 25;
         }
         .title {
-            font-size: 2.87rem;
+            font-size: 2.5rem;
             color: #fff;
             margin-bottom: 0.5rem;
             text-shadow: 0 0 20px #ff69b4, 0 0 40px #ff69b4, 0 0 60px #ff69b4;
@@ -76,7 +77,7 @@
         }
 
         .name {
-            font-size: 3.5rem;
+            font-size: 3rem;
             color: #ff69b4;
             margin: 0.5rem 0 1.5rem;
             text-shadow: 0 0 15px rgba(255, 105, 180, 0.7), 0 0 30px rgba(255, 105, 180, 0.5);
@@ -91,7 +92,7 @@
 
         .message {
             color: #fff;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             line-height: 1.6;
             opacity: 0;
             animation: fadeIn 1s ease-out 1s forwards;
@@ -121,37 +122,37 @@
         }
 
         .heart-container {
-            width: 280px;
-            height: 250px;
-            margin: 1rem auto 1.5rem;
+            width: 220px;
+            height: 200px;
+            margin: 1rem auto 1rem;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            transform-style: preserve-3d;
-            perspective: 1000px;
         }
 
+        /* Heart shaped container with solid white background */
         .white-heart {
             width: 100%;
             height: 100%;
             position: relative;
+            background-color: white;
+            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 280 250'%3E%3Cpath d='M140 40C140 0 0 0 0 80C0 160 140 250 140 250C140 250 280 160 280 80C280 0 140 0 140 40Z' fill='white'/%3E%3C/svg%3E") no-repeat center / contain;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 280 250'%3E%3Cpath d='M140 40C140 0 0 0 0 80C0 160 140 250 140 250C140 250 280 160 280 80C280 0 140 0 140 40Z' fill='white'/%3E%3C/svg%3E") no-repeat center / contain;
+            box-shadow: 0 0 30px 10px #ff69b4;
+            animation: heartbeat 1.5s infinite alternate;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            clip-path: path('M 140 40 C 140 0, 0 0, 0 80 C 0 160, 140 250, 140 250 C 140 250, 280 160, 280 80 C 280 0, 140 0, 140 40 Z');
-            background: white;
-            box-shadow: 0 0 30px 10px #ff69b4, 0 0 0 8px rgba(255,255,255,0.3);
-            animation: heartbeat 1.5s infinite alternate, heartRotate 15s infinite linear;
-            transform-origin: center center;
             padding: 20px;
+            overflow: visible;
         }
         
         .heart-text {
             color: #ff1493;
             text-align: center;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: bold;
             margin: 0;
             padding: 0;
@@ -159,23 +160,54 @@
             line-height: 1.2;
             z-index: 10;
             position: absolute;
-            top: 55%;
+            top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 100%;
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        #cake-3d {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto;
+        /* Outside cake container */
+        .outside-cake-container {
             position: relative;
-            z-index: 5;
-            animation: cakeFloat 4s infinite ease-in-out;
-            top: -15px;
+            margin: 15px auto 10px;
+            width: 120px;
+            height: 120px;
+            animation: cakeEntrance 1.5s ease-out 0.5s both, cakeFloat 4s infinite ease-in-out;
         }
 
-        #confetti, #balloons {
+        /* Outside cake image */
+        #outside-cake-img {
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.7));
+        }
+
+        /* Candle flame animation */
+        .candle-flame {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 30px;
+            background: radial-gradient(ellipse at center, #ffffc2 0%, #ffff00 40%, #ff9900 100%);
+            border-radius: 50% 50% 20% 20%;
+            box-shadow: 0 0 20px #ffff00, 0 0 40px #ffcc00;
+            animation: flicker 1s infinite alternate;
+            z-index: 5;
+        }
+
+        #cake-img {
+            width: 80px;
+            height: auto;
+            margin: -30px auto 0;
+            animation: cakeFloat 4s infinite ease-in-out;
+        }
+
+        #confetti {
             pointer-events: none;
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -187,9 +219,9 @@
             color: white;
             border: none;
             padding: 12px 25px;
-            margin-top: 20px;
+            margin-top: 15px;
             border-radius: 50px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             cursor: pointer;
             position: relative;
             overflow: hidden;
@@ -203,16 +235,8 @@
             box-shadow: 0 0 30px rgba(255, 105, 180, 1);
         }
 
-        .glow-button::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(rgba(255, 255, 255, 0.3), transparent);
-            transform: rotate(45deg);
-            animation: buttonShine 3s infinite;
+        .glow-button:active {
+            transform: scale(0.98);
         }
 
         .heart {
@@ -222,6 +246,15 @@
             transform: translateY(0);
             animation: heartFall 6s linear forwards;
             z-index: 15;
+        }
+
+        /* Simplified background stars */
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ff69b4;
+            animation: twinkle 3s infinite alternate;
         }
 
         @keyframes heartFall {
@@ -240,6 +273,12 @@
             0% { opacity: 0; transform: scale(0.5) rotate(-10deg) translateY(200px); }
             80% { opacity: 1; transform: scale(1.05) rotate(3deg) translateY(-10px); }
             100% { opacity: 1; transform: scale(1) rotate(0deg) translateY(0); }
+        }
+
+        @keyframes cakeEntrance {
+            0% { opacity: 0; transform: scale(0) rotate(20deg); }
+            60% { opacity: 1; transform: scale(1.2) rotate(-5deg); }
+            100% { opacity: 1; transform: scale(1) rotate(0deg); }
         }
 
         @keyframes float {
@@ -278,14 +317,6 @@
             100% { transform: scale(1.1); }
         }
 
-        @keyframes heartRotate {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(5deg); }
-            50% { transform: rotate(0deg); }
-            75% { transform: rotate(-5deg); }
-            100% { transform: rotate(0deg); }
-        }
-
         @keyframes cakeFloat {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
@@ -302,14 +333,25 @@
             100% { box-shadow: 0 0 30px rgba(255, 105, 180, 1), 0 0 50px rgba(255, 105, 180, 0.5); }
         }
 
-        @keyframes buttonShine {
-            0% { left: -50%; }
-            100% { left: 150%; }
-        }
-
         @keyframes shine {
             0% { background-position: 0% 50%; }
             100% { background-position: 200% 50%; }
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes flicker {
+            0%, 100% { 
+                transform: translateX(-50%) scale(1);
+                opacity: 1;
+            }
+            50% { 
+                transform: translateX(-50%) scale(0.9);
+                opacity: 0.8;
+            }
         }
 
         /* Individual letter animation for title */
@@ -325,60 +367,110 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            .title { font-size: 2.5rem; }
-            .name { font-size: 3rem; }
-            .message { font-size: 1rem; }
-            .heart-container {
-                width: 220px;
-                height: 200px;
+            .birthday-card {
+                padding: 1.5rem;
+                margin-top: 40px;
+                max-width: 95vw;
             }
-            #cake-3d {
-                width: 140px;
+            
+            .title-banner {
+                top: -30px;
+            }
+            
+            .title { 
+                font-size: 1.8rem; 
+            }
+            
+            .name { 
+                font-size: 2.2rem; 
+            }
+            
+            .message { 
+                font-size: 0.9rem; 
+            }
+            
+            .heart-container {
+                width: 180px;
+                height: 160px;
+                margin-top: 0;
+                margin-bottom: 0.5rem;
+            }
+            
+            #cake-img {
+                width: 60px;
+            }
+            
+            .heart-text {
+                font-size: 1.1rem;
+            }
+            
+            .outside-cake-container {
+                width: 90px;
+                height: 90px;
+                margin: 10px auto 5px;
+            }
+            
+            .candle-flame {
+                width: 15px;
+                height: 22px;
+                top: -8px;
+            }
+            
+            .glow-button {
+                padding: 10px 20px;
+                font-size: 1rem;
+                margin-top: 10px;
+            }
+        }
+
+        /* Extra small devices */
+        @media (max-width: 375px) {
+            .title { 
+                font-size: 1.5rem; 
+            }
+            
+            .title-banner {
+                top: -25px;
+            }
+            
+            .name { 
+                font-size: 1.8rem; 
+            }
+            
+            .heart-container {
+                width: 150px;
                 height: 140px;
             }
+            
+            #cake-img {
+                width: 50px;
+            }
+            
+            .heart-text {
+                font-size: 0.9rem;
+                width: 75%;
+            }
+            
+            .outside-cake-container {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .message {
+                font-size: 0.8rem;
+                line-height: 1.4;
+            }
+            
+            .message p {
+                margin: 0.3rem 0;
+            }
+            
+            .glow-button {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
         }
 
-        /* Additional special effects */
-        .sparkles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 15;
-        }
-
-        .sparkle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background-color: white;
-            box-shadow: 0 0 10px 2px #ffd700;
-            animation: sparkleAnim 2s infinite;
-        }
-
-        @keyframes sparkleAnim {
-            0% { transform: scale(0); opacity: 0; }
-            50% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(0); opacity: 0; }
-        }
-        
-        /* Preloader */
-        #preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-        }
-        
         /* Birthday message */
         #birthdayMessage {
             display: none;
@@ -390,31 +482,30 @@
             padding: 20px;
             border-radius: 10px;
             z-index: 100;
-            max-width: 80%;
+            max-width: 85%;
             box-shadow: 0 0 30px rgba(255, 105, 180, 0.8);
         }
+        
+        /* Music control button */
+        #musicToggle {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 30px;
+            cursor: pointer;
+            z-index: 100;
+            font-size: 14px;
+        }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
-    <!-- Add confetti library -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
-    <!-- Preloader -->
-    
-    
-    <!-- Audio elements -->
-    <audio id="backgroundMusic" loop>
-        <source src="" type="audio/mpeg">
-    </audio>
-    <audio id="birthdaySong">
-        <source src="" type="audio/mpeg">
-    </audio>
-    
     <div class="container">
-        <canvas id="bg-canvas"></canvas>
+        <div id="bg-stars"></div>
         <div id="confetti"></div>
-        <div id="balloons"></div>
         <div class="content">
             <div class="birthday-card">
                 <div class="title-banner">
@@ -441,18 +532,22 @@
                 </div>
                 <div class="heart-container">
                     <div class="white-heart">
-                        <div id="cake-3d"></div>
                         <div class="heart-text">Happy Birthday Yoshitha</div>
                     </div>
                 </div>
+                
+                <!-- New outside cake container -->
+                <div class="outside-cake-container">
+                    <div class="candle-flame"></div>
+                    <img id="outside-cake-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3C!-- Bottom layer --%3E%3Crect x='15' y='70' width='70' height='25' fill='%23ff69b4' rx='5' ry='5'/%3E%3C!-- Middle layer --%3E%3Crect x='20' y='50' width='60' height='20' fill='%23ffffff' rx='5' ry='5'/%3E%3C!-- Top layer --%3E%3Crect x='25' y='30' width='50' height='20' fill='%23ff69b4' rx='5' ry='5'/%3E%3C!-- Candle --%3E%3Crect x='47' y='10' width='6' height='20' fill='%23ffd700'/%3E%3C!-- Decorations --%3E%3Ccircle cx='30' cy='60' r='3' fill='%23ff1493'/%3E%3Ccircle cx='45' cy='60' r='3' fill='%23ffd700'/%3E%3Ccircle cx='60' cy='60' r='3' fill='%23ff1493'/%3E%3Ccircle cx='75' cy='60' r='3' fill='%23ffd700'/%3E%3Ccircle cx='35' cy='40' r='3' fill='%23ffd700'/%3E%3Ccircle cx='50' cy='40' r='3' fill='%23ff1493'/%3E%3Ccircle cx='65' cy='40' r='3' fill='%23ffd700'/%3E%3Ccircle cx='30' cy='80' r='3' fill='%23ffd700'/%3E%3Ccircle cx='45' cy='80' r='3' fill='%23ff1493'/%3E%3Ccircle cx='60' cy='80' r='3' fill='%23ffd700'/%3E%3Ccircle cx='75' cy='80' r='3' fill='%23ff1493'/%3E%3C/svg%3E" alt="Birthday Cake">
+                </div>
+                
                 <div class="message">
                     <p>On this special day of yours,</p>
                     <p>May your life sparkle with moments of joy,</p>
                     <p>Love, success, and unforgettable memories!</p>
                 </div>
                 <button class="glow-button" id="wishButton">LOVE YOU 💖</button>
-                <div class="floating-hearts"></div>
-                <div class="sparkles" id="sparkles"></div>
                 <div id="falling-hearts"></div>
             </div>
         </div>
@@ -461,11 +556,110 @@
     <!-- Birthday message popup -->
     <div id="birthdayMessage">
         <h2 style="color: #ff1493; margin-bottom: 15px;">Happy Birthday Yoshitha! 🎂</h2>
-        <p style="font-size: 18px; margin-bottom: 15px;">Wishing you an amazing birthday filled with love, laughter, and everything wonderful!</p>
+        <p style="font-size: 16px; margin-bottom: 15px;">Wishing you an amazing birthday filled with love, laughter, and everything wonderful!</p>
         <button onclick="this.parentElement.style.display='none';" style="background: #ff69b4; color: white; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer;">Close</button>
     </div>
     
-    <!-- Music control button -->
-    <button id="musicToggle" style="position: fixed; bottom: 20px; right: 20px; background: rgba(0,0,0,0.6); color: white; border: none; padding: 10px 15px; border-radius: 30px; cursor: pointer; z-index: 100;">🔊 Play Music</button>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // Create background stars
+        function createStars() {
+            const bgStars = document.getElementById('bg-stars');
+            for (let i = 0; i < 100; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.width = Math.random() * 3 + 1 + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                bgStars.appendChild(star);
+            }
+        }
 
-    <script src="script.js">
+        // Create falling hearts function
+        function createFallingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '❤️';
+            heart.style.setProperty('--random-x', Math.random() * 2 - 1);
+            heart.style.setProperty('--random-rotate', Math.random() * 2 - 1);
+            heart.style.left = Math.random() * 100 + 'vw';
+            document.getElementById('falling-hearts').appendChild(heart);
+
+            // Remove heart after animation ends
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        // Confetti effect
+        function launchConfetti() {
+            const count = 200;
+            const defaults = {
+                origin: { y: 0.7 },
+                zIndex: 20
+            };
+            
+            function fire(particleRatio, opts) {
+                confetti({
+                    ...defaults,
+                    ...opts,
+                    particleCount: Math.floor(count * particleRatio)
+                });
+            }
+            
+            fire(0.25, {
+                spread: 26,
+                startVelocity: 55,
+            });
+            fire(0.2, {
+                spread: 60,
+            });
+            fire(0.35, {
+                spread: 100,
+                decay: 0.91,
+                scalar: 0.8
+            });
+            fire(0.1, {
+                spread: 120,
+                startVelocity: 25,
+                decay: 0.92,
+                scalar: 1.2
+            });
+            fire(0.1, {
+                spread: 120,
+                startVelocity: 45,
+            });
+        }
+
+        // Handle events after page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create stars
+            createStars();
+            
+            // Launch confetti on load
+            launchConfetti();
+            
+            // Start creating falling hearts
+            setInterval(createFallingHeart, 1000);
+            
+            // Wish button click event
+            document.getElementById('wishButton').addEventListener('click', function() {
+                // Show birthday message
+                document.getElementById('birthdayMessage').style.display = 'block';
+                
+                // Launch more confetti
+                launchConfetti();
+                
+                // Add more falling hearts
+                for (let i = 0; i < 10; i++) {
+                    setTimeout(() => {
+                        createFallingHeart();
+                    }, i * 300);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
